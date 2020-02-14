@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <script type="text/javascript" src="jquery-2.1.0.min.js"></script>-->
+    <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+
+</head>
+<body>
+<form method="POST" action=" ">
+    {% csrf_token %}
+    <input type="text" name="username" id="username">
+    <input type="submit" id="submit">
+</form>
+<script>
+ $(document).ready(function(){
+
+$('#submit').click(function(){
+
+    var value=document.getElementById("username").value;
+    $.ajax({
+        url:'/home/',
+        type:'POST',
+        data:{value:value,
+        csrfmiddlewaretoken:'{{csrf_token}}'},
+            success:function(data){
+            alert(data.result);
+            }
+        });
+
+    });
+});
+
+</script>
+</body>
+
+</html>
